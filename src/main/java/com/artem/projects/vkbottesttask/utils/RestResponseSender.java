@@ -4,12 +4,8 @@ import com.artem.projects.vkbottesttask.dtos.MessageResponse;
 import lombok.SneakyThrows;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,11 +32,7 @@ public class RestResponseSender {
                 .toUriString();
         log.info(url);
 
-        MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
-        headers.add(HttpHeaders.CONTENT_TYPE, "text/plain;charset=UTF-8");
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+        ResponseEntity<String> response = restTemplate.getForEntity(url, String.class);
         log.info(response.getBody());
     }
 }

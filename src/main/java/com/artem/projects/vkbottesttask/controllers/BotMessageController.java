@@ -4,9 +4,6 @@ import com.artem.projects.vkbottesttask.dtos.events.EventRequest;
 import com.artem.projects.vkbottesttask.services.MessagesService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,10 +14,10 @@ public class BotMessageController {
     private final MessagesService messagesService;
 
     @PostMapping("/send-message")
-    public ResponseEntity<HttpStatus> receiveAndSendMessage(@RequestBody EventRequest eventRequest) {
+    public String receiveAndSendMessage(@RequestBody EventRequest eventRequest) {
         log.info(eventRequest.toString());
 
         messagesService.changeEnteredMsg(eventRequest);
-        return ResponseEntity.ok(HttpStatus.OK);
+        return "ok";
     }
 }
